@@ -3,6 +3,8 @@
 **A lightweight, feature-rich home plugin for Minecraft SMP servers.**
 Set, manage and teleport to your homes through a clean GUI or simple commands.
 
+https://modrinth.com/plugin/homes-gui
+
 ---
 
 ## ✨ Features
