@@ -1,0 +1,4 @@
+name: HomeGui
+version: '1.0-SNAPSHOT'
+main: fr.gregwll.homeGui.HomeGui
+api-version: '1.21'
