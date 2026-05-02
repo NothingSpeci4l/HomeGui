@@ -1,10 +1,11 @@
 plugins {
     id 'java'
+    id("com.gradleup.shadow") version "9.3.1"
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = 'fr.gregwll'
-version = '1.0-SNAPSHOT'
+version = '1.0-Release'
 
 repositories {
     mavenCentral()
@@ -16,6 +17,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
+    implementation("org.bstats:bstats-bukkit:3.2.1")
 }
 
 tasks {
@@ -43,6 +45,16 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
     }
+}
+
+tasks.shadowJar {
+    configurations = [project.configurations.runtimeClasspath]
+
+    dependencies {
+        exclude { it.moduleGroup != "org.bstats" }
+    }
+
+    relocate("org.bstats", "${project.group}")
 }
 
 processResources {

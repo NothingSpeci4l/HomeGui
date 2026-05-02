@@ -1,4 +1,26 @@
 name: HomeGui
 version: '1.0-SNAPSHOT'
 main: fr.gregwll.homeGui.HomeGui
+author: Gregwll
 api-version: '1.21'
+commands:
+  home:
+    description: permit to teleport to his home.
+    aliases:
+      - h
+  homeadmin:
+    description: permit to teleport to anyone's home
+    permission: hg.admin
+  delhomeadmin:
+    description: Delete any player's home
+    permission: hg.admin
+  sethome:
+    description: permit to set a home
+  delhome:
+    description: permit to remove a home
+  homereload:
+    description: Reload the HomeGui config
+    usage: /homereload
+  confirmhome:
+    description: Confirm teleportation to an unsafe home
+    usage: /confirmhome
