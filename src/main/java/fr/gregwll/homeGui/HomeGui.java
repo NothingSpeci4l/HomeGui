@@ -7,6 +7,8 @@ import fr.gregwll.homeGui.files.ConfigManager;
 import fr.gregwll.homeGui.gui.EGuiListener;
 import fr.gregwll.homeGui.files.UserSerializationManager;
 import fr.gregwll.homeGui.utils.Constents;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -50,6 +52,15 @@ public final class HomeGui extends JavaPlugin {
         });
 
         Bukkit.getPluginManager().registerEvents(new EGuiListener(), this);
+
+
+        int pluginId = 31062;
+        Metrics metrics = new Metrics(this, pluginId);
+
+        // Optional: Add custom charts
+        metrics.addCustomChart(
+                new SimplePie("chart_id", () -> "My value")
+        );
     }
 
     @Override
