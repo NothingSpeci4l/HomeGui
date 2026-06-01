@@ -64,18 +64,36 @@ Customize the prefix, maximum homes per player, teleportation cooldown, teleport
 ## ⚙️ Config
 
 ```yaml
-# Maximum number of homes per player
+# HomeGui Configuration
+
+# Maximum number of homes per player (default: 3)
 max-homes: 3
 
 # Plugin prefix
-prefix: "HomeGui "
+prefix: "§x§0§0§8§D§F§F§l§nH§x§2§1§7§6§F§F§l§no§x§4§3§5§E§F§F§l§nm§x§6§4§4§7§F§F§l§ne§x§8§5§2§F§F§F§l§nG§x§A§7§1§8§F§F§l§nU§x§C§8§0§0§F§F§l§nI "
 
-# Allow unsafe teleportation
-# If true, players will be asked to confirm with /confirmhome
+# Allow unsafe teleportation (teleporting to dangerous locations like inside blocks)
+# If false, the plugin will check if the destination is safe before teleporting
 allow-unsafe-teleport: false
 
-# Confirmation expiry delay in seconds
+# Pending teleport expiry delay in seconds (default: 60) // ONLY IF "allow-unsafe-teleport" IS SET ON FALSE.
 confirm-expiry: 60
+
+# Cooldown between teleportations in seconds (0 = disabled)
+teleport-cooldown: 5
+
+# Warmup delay before teleporting in seconds (0 = disabled)
+# The player must stand still during this delay
+teleport-warmup: 3
+
+# Cancel the warmup if the player moves
+cancel-on-move: true
+
+# Cancel the warmup if the player takes damage
+cancel-on-damage: true
+
+# Enable /back command (returns to position before last home teleport)
+enable-back: true
 ```
 
 ---
