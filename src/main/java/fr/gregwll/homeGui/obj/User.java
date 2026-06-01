@@ -16,6 +16,7 @@ public class User {
         return homes;
     }
 
-
-
+    public String getPlayerName() {
+        return playerName;
+    }
 }

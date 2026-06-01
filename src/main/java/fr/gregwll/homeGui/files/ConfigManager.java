@@ -30,4 +30,24 @@ public class ConfigManager {
     public int getConfirmExpiry() {
         return plugin.getConfig().getInt("confirm-expiry", 60);
     }
+
+    public int getTeleportCooldown() {
+        return plugin.getConfig().getInt("teleport-cooldown", 5);
+    }
+
+    public int getTeleportWarmup() {
+        return plugin.getConfig().getInt("teleport-warmup", 0);
+    }
+
+    public boolean isCancelOnMove() {
+        return plugin.getConfig().getBoolean("cancel-on-move", true);
+    }
+
+    public boolean isCancelOnDamage() {
+        return plugin.getConfig().getBoolean("cancel-on-damage", true);
+    }
+
+    public boolean isBackEnabled() {
+        return plugin.getConfig().getBoolean("enable-back", true);
+    }
 }

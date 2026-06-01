@@ -1,8 +1,6 @@
 package fr.gregwll.homeGui.gui;
 
 import fr.gregwll.homeGui.HomeGui;
-import fr.gregwll.homeGui.files.FileUtils;
-import fr.gregwll.homeGui.files.UserSerializationManager;
 import fr.gregwll.homeGui.obj.HomeLocation;
 import fr.gregwll.homeGui.obj.User;
 import fr.gregwll.homeGui.utils.Constents;
@@ -15,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +22,13 @@ public class HomesGui {
     private static final int[] HOME_SLOTS = {10, 11, 12, 13, 14, 15, 16};
 
     public static void open(Player player, int page) {
-        final File fUser = new File(Constents.getSaveDir(), player.getName() + ".json");
-        if (!fUser.exists()) {
+        User user = HomeGui.getInstance().getUserCache().get(player.getUniqueId());
+
+        if (user == null || user.getHomesMap().isEmpty()) {
             player.sendMessage(Constents.getPrefix() + "§fYou have no homes.");
             return;
         }
 
-        final UserSerializationManager usm = HomeGui.getInstance().getUserSerializationManager();
-        final User user = usm.deserialize(FileUtils.loadContent(fUser));
         List<String> homeNames = new ArrayList<>(user.getHomesMap().keySet());
 
         int totalPages = (int) Math.ceil((double) homeNames.size() / SLOTS_PER_PAGE);
@@ -43,26 +39,22 @@ public class HomesGui {
         Inventory inv = Bukkit.createInventory(null, 27,
                 "§x§0§0§8§D§F§FH§x§1§9§7§B§F§Fo§x§3§2§6§A§F§Fm§x§4§B§5§8§F§Fe §8[§7" + (page + 1) + "§8/§7" + totalPages + "§8]");
 
-        // Déco ligne 1 et 3
         ItemStack deco = makeGlass(Material.BLUE_STAINED_GLASS_PANE, " ");
         for (int i = 0; i < 9; i++) inv.setItem(i, deco);
         for (int i = 18; i < 27; i++) inv.setItem(i, deco);
 
-        // Flèche précédente (slot 9)
         if (page > 0) {
             inv.setItem(9, makeArrow("§c§lPrevious page", Material.RED_STAINED_GLASS_PANE));
         } else {
             inv.setItem(9, makeGlass(Material.RED_STAINED_GLASS_PANE, " "));
         }
 
-        // Flèche suivante (slot 17)
         if (page < totalPages - 1) {
             inv.setItem(17, makeArrow("§a§lNext page", Material.GREEN_STAINED_GLASS_PANE));
         } else {
             inv.setItem(17, makeGlass(Material.GREEN_STAINED_GLASS_PANE, " "));
         }
 
-        // Homes de la page
         int start = page * SLOTS_PER_PAGE;
         int end = Math.min(start + SLOTS_PER_PAGE, homeNames.size());
 
@@ -81,26 +73,22 @@ public class HomesGui {
         int slot = event.getRawSlot();
         String title = event.getView().getTitle();
 
-        // Récupérer la page actuelle depuis le titre
         int currentPage = 0;
         try {
             String stripped = ChatColor.stripColor(title).replaceAll(".*\\[(\\d+)/.*", "$1");
             currentPage = Integer.parseInt(stripped) - 1;
         } catch (Exception ignored) {}
 
-        // Flèche précédente
         if (slot == 9) {
             if (currentPage > 0) open(player, currentPage - 1);
             return;
         }
 
-        // Flèche suivante
         if (slot == 17) {
             open(player, currentPage + 1);
             return;
         }
 
-        // Click sur un home
         for (int i = 0; i < HOME_SLOTS.length; i++) {
             if (slot == HOME_SLOTS[i]) {
                 ItemStack item = event.getCurrentItem();
@@ -108,13 +96,8 @@ public class HomesGui {
 
                 String homeName = ChatColor.stripColor(item.getItemMeta().getDisplayName());
 
-                final File fUser = new File(Constents.getSaveDir(), player.getName() + ".json");
-                if (!fUser.exists()) return;
-
-                final UserSerializationManager usm = HomeGui.getInstance().getUserSerializationManager();
-                final User user = usm.deserialize(FileUtils.loadContent(fUser));
-
-                if (!user.getHomesMap().containsKey(homeName)) return;
+                User user = HomeGui.getInstance().getUserCache().get(player.getUniqueId());
+                if (user == null || !user.getHomesMap().containsKey(homeName)) return;
 
                 HomeLocation hl = user.getHomesMap().get(homeName);
                 World world = Bukkit.getWorld(hl.getWorld());

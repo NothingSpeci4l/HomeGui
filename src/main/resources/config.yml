@@ -12,3 +12,21 @@ allow-unsafe-teleport: false
 
 # Pending teleport expiry delay in seconds (default: 60) // ONLY IF "allow-unsafe-teleport" IS SET ON FALSE.
 confirm-expiry: 60
+
+# Cooldown between teleportations in seconds (0 = disabled)
+teleport-cooldown: 5
+
+# Warmup delay before teleporting in seconds (0 = disabled)
+# The player must stand still during this delay
+teleport-warmup: 3
+
+# Cancel the warmup if the player moves
+cancel-on-move: true
+
+# Cancel the warmup if the player takes damage
+cancel-on-damage: true
+
+# Enable /back command (returns to position before last home teleport)
+enable-back: true
+
+# Copyright gregwll@2026

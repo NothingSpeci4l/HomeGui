@@ -1,5 +1,5 @@
 name: HomeGui
-version: '1.0.1-Release'
+version: '1.0.2-Release'
 main: fr.gregwll.homeGui.HomeGui
 author: Gregwll
 api-version: '1.21'
@@ -24,3 +24,6 @@ commands:
   confirmhome:
     description: Confirm teleportation to an unsafe home
     usage: /confirmhome
+  back:
+    description: Return to your previous location
+    usage: /back
