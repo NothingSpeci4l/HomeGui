@@ -11,10 +11,10 @@
   <img src="https://img.shields.io/badge/lines%20of%20code-1139-blue">
 </p>
 
+# 🏠 HomeGui
+
 **A lightweight, feature-rich home plugin for Minecraft SMP servers.**
 Set, manage and teleport to your homes through a clean GUI or simple commands.
-
-https://modrinth.com/plugin/homes-gui
 
 ---
 
@@ -33,7 +33,7 @@ The plugin checks whether a home destination is safe before teleporting. If unsa
 Operators and players with the `hg.admin` permission can teleport to or delete any player's home using `player:home` syntax with full tab-completion.
 
 ### ⚙️ Full Config Support
-Customize the prefix, maximum homes per player, unsafe teleport behavior, and confirmation expiry delay — all from `config.yml`. Reload without restarting with `/homereload`.
+Customize the prefix, maximum homes per player, teleportation cooldown, teleportation cancelation, unsafe teleport behavior, and confirmation expiry delay — all from `config.yml`. Reload without restarting with `/homereload`.
 
 ---
 
@@ -49,6 +49,7 @@ Customize the prefix, maximum homes per player, unsafe teleport behavior, and co
 | `/homeadmin <player>:<home>` | Teleport to any player's home |
 | `/delhomeadmin <player>:<home>` | Delete any player's home |
 | `/homereload` | Reload the config |
+| `/back` | Return back to the last position |
 
 ---
 
@@ -86,7 +87,7 @@ Drop the `.jar` into your `plugins/` folder and restart your server. No dependen
 
 ## 🔧 Compatibility
 - ✅ Paper / Spigot
-- ✅ Minecraft 1.21.x
+- ✅ Minecraft 1.21.x // 26.x.x
 
 ---
 
