@@ -8,6 +8,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Author-Gregwll-blue?style=flat-square">
   <img src="https://img.shields.io/badge/Written%20In-Java-orange?style=flat-square">
+  <img src="https://img.shields.io/badge/lines%20of%20code-1139-blue">
 </p>
 
 **A lightweight, feature-rich home plugin for Minecraft SMP servers.**
